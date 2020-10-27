@@ -4,7 +4,7 @@
 
 
 
-<nav class=" navbar navbar-expand-sm nav navbar-light" style="background-color : transparent" id="my-nav">
+<nav class=" navbar navbar-expand-sm nav navbar-light" style=" background: Linear-gradient(to left, #eaf2e7, #89dca2);" id="my-nav">
         <!-- <a class="navbar-brand" href="#"><img src="https://assets.website-files.com/5ee098f5efb107e68b185595/5ef53752bb320fa622cda2fd_animate_ui.svg" alt="logo" style="width:139px;height: 37px;"></a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
 
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" style="padding:20px" href="create.php">Place New Order</a>
+                    <a class="nav-link" style="padding:20px" href="form.php">Place New Order</a>
                 </li>
                 <!-- <li class="nav-item active">
                     <a class="nav-link" style="padding:20px" href="#">Course Outline</a>

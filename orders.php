@@ -2,7 +2,9 @@
 session_start();
 if (!(isset($_SESSION['user']))) {
   header("location:index.php");
+  
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,15 +22,17 @@ if (!(isset($_SESSION['user']))) {
 
 <body>
   <?php
-   
-   
-        include 'nav.php';
-  
+
+
+  include 'nav.php';
+
   $active_username = $_SESSION['user']['customer_name'];
   $active_userid = $_SESSION['user']['customer_id'];
+  
+     
   ?>
   <center>
-    <h3>Hello <?php echo "$active_username" ?></h3>
+    <h3>Hello <?php echo "#$active_userid $active_username" ?></h3>
 
   </center>
   <div class="table-responsive container">
@@ -46,6 +50,7 @@ if (!(isset($_SESSION['user']))) {
           <th> product_quantity</th>
           <th>payment_mode</th>
           <th> order_status</th>
+          <th> operations</th>
         </tr>
 
       </thead>
@@ -55,57 +60,59 @@ if (!(isset($_SESSION['user']))) {
 
           <form class="form-group" action="orders.php" method="GET">
 
-          </div>
-            <input type="text" class="form-control" name="search" id="search" style="border-bottom: 3px;" placeholder="Search product_name or product_description" value="<?php if (isset($_GET['search'])) { echo $_GET['search']; } ?>">
+            <input type="text" class="form-control" name="search" id="search" style="border-bottom: 3px;" placeholder="Search product_name or product_description" value="<?php if (isset($_GET['search'])) {
+                                                                                                                                                                            echo $_GET['search'];
+                                                                                                                                                                          } ?>">
             <div class="form-group">
               <center>
                 <button class="btn btn-primary" type="submit">Search</button>
-              
+
+              </center>
+
+
+            </div>
+            <?php
+
+
+            include 'conn.php';
+
+            if (isset($_GET['search']) && $_GET['search'] != "") {
+
+              $search = $_GET['search'];
+              $query = "SELECT * FROM ORDERS where  (product_name LIKE '%$search%' OR product_description LIKE '%$search%') AND customer_id='$active_userid'";
+            } else {
+              $query = "SELECT * FROM Orders WHERE customer_id=$active_userid";
+            }
+
+            $result = mysqli_query($conn, $query);
+            mysqli_error($conn);
+
+
+
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+
+              <tr>
+                <td><?php echo $row['order_id']; ?> </td>
+                <td><?php echo $row['customer_id']; ?> </td>
+                <td><?php echo $row['product_name']; ?> </td>
+                <td><?php echo $row['product_description']; ?> </td>
+                <td><?php echo $row['product_price']; ?> </td>
+                <td><?php echo $row['product_quantity']; ?> </td>
+                <td><?php echo $row['payment_mode']; ?> </td>
+                <td><?php echo $row['order_status']; ?> </td>
+                <td><a href="form.php?order_id=<?php echo $row['order_id'];?>"><button class="btn btn-warning" type="button">Update</button></a>  </td>
+              </tr>
+            <?php
+            }
+            
+            ?>
+
+
           </form>
-          </center>
-        
-  </div>
-  <?php
-
-
-  include 'conn.php';
-
-  if (isset($_GET['search']) && $_GET['search'] != "") {
-
-    $search = $_GET['search'];
-    $query = "SELECT * FROM ORDERS where  (product_name LIKE '%$search%' OR product_description LIKE '%$search%') AND customer_id='$active_userid'";
-  } else {
-    $query = "SELECT * FROM Orders WHERE customer_id=$active_userid";
-  }
-
-  $result = mysqli_query($conn, $query);
-  mysqli_error($conn);
-
-
-
-  while ($row = mysqli_fetch_assoc($result)) {
-  ?>
-
-    <tr>
-      <td><?php echo $row['order_id']; ?> </td>
-      <td><?php echo $row['customer_id']; ?> </td>
-      <td><?php echo $row['product_name']; ?> </td>
-      <td><?php echo $row['product_description']; ?> </td>
-      <td><?php echo $row['product_price']; ?> </td>
-      <td><?php echo $row['product_quantity']; ?> </td>
-      <td><?php echo $row['payment_mode']; ?> </td>
-      <td><?php echo $row['order_status']; ?> </td>
-    </tr>
-  <?php
-  }
-
-
-  ?>
-
-
-
-  </tbody>
-  </table>
+        </div>
+      </tbody>
+    </table>
   </div>
 
 </body>

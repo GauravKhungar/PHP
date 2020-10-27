@@ -7,6 +7,11 @@ body {
     background: Linear-gradient(to left, #89dca2, #eaf2e7);
 }
 
+.ps {
+    background: -webkit-Linear-gradient(to left, #eaf2e7, #89dca2);
+    background: Linear-gradient(to left, #eaf2e7, #89dca2);
+}
+
 .hd {
     display: none;
 }

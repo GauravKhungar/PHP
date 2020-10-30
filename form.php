@@ -26,7 +26,7 @@ if (!(isset($_SESSION['user']))) {
     include 'nav.php';
     $active_username = $_SESSION['user']['customer_name'];
     $active_userid = $_SESSION['user']['customer_id'];
-    $order_id= $_GET['order_id'] ;
+    
     ?>
     <div class="row mt-3">
       <div class="column col-sm-4 col-md-4">
@@ -99,7 +99,9 @@ if (!(isset($_SESSION['user']))) {
       <a href="create.php">
           <button type="submit" class="btn btn-success" name="buy_now">Buy Now</button>
         </a>
-
+      <?php 
+      $order_id= $_GET['order_id'] ;
+      ?>
       <a href="update.php?order_id=<?php echo $order_id;?>">
         <button type="submit" class="btn btn-warning" name="update" value="update">Update</button>
         </a>

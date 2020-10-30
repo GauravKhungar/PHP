@@ -37,24 +37,7 @@ if (!(isset($_SESSION['user']))) {
   </center>
   <div class="table-responsive container">
 
-    <table class="table table-striped table-hover">
-      <thead>
-
-
-        <tr>
-          <th> order_id</th>
-          <th>customer_id</th>
-          <th>product_name</th>
-          <th>product_description</th>
-          <th>product_price</th>
-          <th> product_quantity</th>
-          <th>payment_mode</th>
-          <th> order_status</th>
-          <th> operations</th>
-        </tr>
-
-      </thead>
-      <tbody>
+   
         <div class="form-group">
 
 
@@ -85,13 +68,39 @@ if (!(isset($_SESSION['user']))) {
             }
 
             $result = mysqli_query($conn, $query);
-            mysqli_error($conn);
+           echo mysqli_error($conn);
+           $empty='';
+           if(mysqli_num_rows($result)==0)
+           {
+             ?>
+             <div class="container">
+               <h4 style="color:red">Please place an order first!!</h4>
+               </div>
+             <?php
+             $empty='display:none';
+           }
 
-
-
+           
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
+    <table class="table table-striped table-hover" style="<?php echo $empty; ?>">
+      <thead>
 
+
+        <tr>
+          <th> order_id</th>
+          <th>customer_id</th>
+          <th>product_name</th>
+          <th>product_description</th>
+          <th>product_price</th>
+          <th> product_quantity</th>
+          <th>payment_mode</th>
+          <th> order_status</th>
+          <th> operations</th>
+        </tr>
+
+      </thead>
+      <tbody>
               <tr>
                 <td><?php echo $row['order_id']; ?> </td>
                 <td><?php echo $row['customer_id']; ?> </td>

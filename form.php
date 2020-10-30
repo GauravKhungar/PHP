@@ -26,9 +26,14 @@ if (!(isset($_SESSION['user']))) {
     include 'nav.php';
     $active_username = $_SESSION['user']['customer_name'];
     $active_userid = $_SESSION['user']['customer_id'];
+    if (isset($_GET['order_id'])) {
+      $order_id=$_GET['order_id'];
+    }
+      else
     
+   
     ?>
-    <div class="row mt-3">
+    <div class="row mt-3 container">
       <div class="column col-sm-4 col-md-4">
         <center>
           <span>
@@ -37,7 +42,7 @@ if (!(isset($_SESSION['user']))) {
 
         </center>
       </div>
-      <form class="form-group" action="<?php if(isset($order_id)){echo "update.php";} else{echo "create.php";}?>" method="GET">
+      <form class="form-group" action="<?php if(isset($order_id)){$order_id= $_GET['order_id'] ; echo "update.php";} else{echo "create.php";}?>" method="GET">
 
           <div class="column col-sm-8 col-md-8">
 
@@ -92,31 +97,30 @@ if (!(isset($_SESSION['user']))) {
         </div>
 
 
-      
+
 
 
       </select>
+      <?php if (!(isset($_GET['order_id']))) { ?>
       <a href="create.php">
           <button type="submit" class="btn btn-success" name="buy_now">Buy Now</button>
-        </a>
-      <?php 
-      $order_id= $_GET['order_id'] ;
-      ?>
-      <a href="update.php?order_id=<?php echo $order_id;?>">
+      </a><?php } ?>
+     <?php if (isset($_GET['order_id'])) 
+     {
+     ?>
+      <a href="update.php?order_id=<?php echo $_GET['order_id'];?>">
         <button type="submit" class="btn btn-warning" name="update" value="update">Update</button>
-        </a>
-        <a href="delete.php?order_id=<?php echo $order_id;?>">
-
-            <input type="button" class="btn btn-danger" name="delete" value="Delete">
-        </a>
+      </a>
+      <a href="delete.php?order_id=<?php echo $_GET['order_id'];?>">
+        
+        <input type="button" class="btn btn-danger" name="delete" value="Delete">
+      </a>
+       <?php
+     } 
+     ?>
       
-      <?php
-     
-
-
-      ?>
 
     </div>
     </form>
   </body>
-  </html>
+  </html> 

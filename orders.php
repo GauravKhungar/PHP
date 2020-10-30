@@ -54,6 +54,7 @@ if (!(isset($_SESSION['user']))) {
 
 
             </div>
+            
             <?php
 
 
@@ -80,10 +81,8 @@ if (!(isset($_SESSION['user']))) {
              $empty='display:none';
            }
 
-           
-            while ($row = mysqli_fetch_assoc($result)) {
-            ?>
-    <table class="table table-striped table-hover" style="<?php echo $empty; ?>">
+           ?>
+             <table class="table table-striped table-hover" style="<?php echo $empty;?>">
       <thead>
 
 
@@ -100,6 +99,10 @@ if (!(isset($_SESSION['user']))) {
         </tr>
 
       </thead>
+           <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+    
       <tbody>
               <tr>
                 <td><?php echo $row['order_id']; ?> </td>

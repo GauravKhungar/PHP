@@ -65,7 +65,7 @@ if (!(isset($_SESSION['user']))) {
               $search = $_GET['search'];
               $query = "SELECT * FROM orders where  (product_name LIKE '%$search%' OR product_description LIKE '%$search%') AND customer_id='$active_userid'";
             } else {
-              $query = "SELECT * FROM orders WHERE customer_id=$active_userid";
+              $query = "SELECT * FROM orders";
             }
 
             $result = mysqli_query($conn, $query);

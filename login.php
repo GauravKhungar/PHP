@@ -16,6 +16,9 @@ if(isset($_POST['user_email']))
    header("location:orders.php");
  }
  else{
+   ?>
+   <?php
+    
      header("location:index.php");
  }
 }
